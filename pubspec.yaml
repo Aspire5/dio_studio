@@ -1,0 +1,16 @@
+name: dio_studio
+description: >
+  A developer toolkit built on top of Dio for API mocking, recording,
+  replay, network simulation, testing, and request inspection.
+version: 0.0.1
+homepage: https://github.com/your-org/dio_studio
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  dio: ^5.8.0+1
+
+dev_dependencies:
+  lints: ^5.1.1
+  test: ^1.25.15
