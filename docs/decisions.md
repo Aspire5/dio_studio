@@ -35,9 +35,6 @@ Dio is a mature, well-tested HTTP client. Replacing it would mean re-implementin
 **Impact:**
 All features must integrate through Dio's public API (interceptors, adapters, transformers). No internal Dio hacking.
 
-**Future implications:**
-If Dio's interceptor model proves insufficient for a feature, we document the limitation and explore alternatives (custom adapters, wrappers for specific features) without abandoning the core principle.
-
 ---
 
 ## ADR-002: All features are opt-in
@@ -64,9 +61,6 @@ Developers have different needs. A developer who only wants mocking should not p
 
 **Impact:**
 Each feature must be independently activatable. No feature should depend on another being enabled unless explicitly documented.
-
-**Future implications:**
-Feature presets (e.g., "debug mode" that enables inspector + recording) can be added later as convenience shortcuts without violating this principle.
 
 ---
 
@@ -98,9 +92,6 @@ We cannot anticipate every use case. A plugin system lets the community extend d
 **Impact:**
 A stable plugin interface must be defined early. Changes to the plugin API are breaking changes and must be treated with care.
 
-**Future implications:**
-First-party features (recording, mocking, inspection) should themselves be implemented as plugins where possible. This validates the plugin API and keeps the architecture honest.
-
 ---
 
 ## ADR-004: No global state
@@ -128,9 +119,101 @@ Global state makes testing difficult, creates hidden dependencies between compon
 **Impact:**
 All internal code must accept dependencies through constructors or method parameters. No `static` mutable state.
 
-**Future implications:**
-This naturally supports testing and makes the package compatible with any dependency injection approach the developer uses.
+---
+
+## ADR-005: Re-exporting Dio Package
+
+**Date:** 2026-06-30
+
+**Decision:**
+Re-export the underlying `package:dio/dio.dart` dependency directly from the single unified entry point `package:dio_studio/dio_studio.dart`.
+
+**Reasoning:**
+This aligns with the goal of minimizing migration efforts. Instead of managing separate imports for standard Dio requests and dio_studio configurations, developers swap their import to `dio_studio` and all core symbols (`Dio`, `Response`, `DioException`, etc.) remain accessible.
+
+**Alternatives considered:**
+1. Require double imports: `import 'package:dio/dio.dart';` and `import 'package:dio_studio/dio_studio.dart';`.
+   - Rejected: Decreases developer integration experience.
+
+**Pros:**
+- Drop-in migration experience.
+- Single import manages the entire network toolkit client context.
+
+**Cons:**
+- Tight coupling to major Dio versions; a breaking change in Dio requires coordinating updates to dio_studio exports.
 
 ---
 
-_Add new decisions above this line. Use sequential numbering: ADR-005, ADR-006, etc._
+## ADR-006: Studio Context over Service Locator
+
+**Date:** 2026-06-30
+
+**Decision:**
+Replace dynamic runtime map lookups (Service Locator pattern) with a strongly-typed, compile-time checked `StudioContext` passed to plugins during initialization.
+
+**Reasoning:**
+Using `locator.get<Service>()` introduces risk of runtime errors (missing registration), lacks editor autocomplete, and makes writing unit test stubs complex. A strongly-typed `StudioContext` exposes core requirements directly as properties.
+
+**Alternatives considered:**
+1. Simple internal service locator.
+   - Rejected: Adds unnecessary lookup overhead and lacks compile-time safety.
+
+**Pros:**
+- Full editor support, type-safety, and autocomplete.
+- Simpler stubs for testing.
+- Predictable dependency graph.
+
+**Cons:**
+- Adding a new core service requires modifying the `StudioContext` interface (minor API update).
+
+---
+
+## ADR-007: Sequential Pipeline Interception
+
+**Date:** 2026-06-30
+
+**Decision:**
+Execute request, response, and error modification cycles synchronously and sequentially using dedicated interface pipelines in `PluginManager` rather than asynchronously via the Event Bus.
+
+**Reasoning:**
+An Event Bus operates on an asynchronous fire-and-forget loop. This makes short-circuiting requests (such as serving mock responses) or injecting latency transformations extremely difficult. Direct interface pipelines ensure execution order is predictable and synchronous.
+
+**Alternatives considered:**
+1. Asynchronous event-driven interceptor handlers.
+   - Rejected: Leads to race conditions and makes interceptor chaining complex.
+
+**Pros:**
+- High predictability.
+- Easy short-circuiting (e.g. delivering mocks).
+- Bypasses event object allocations on hot paths.
+
+**Cons:**
+- Relies on plugins implementing specific interface mixins (`RequestPlugin`, `ResponsePlugin`).
+
+---
+
+## ADR-008: Unopinionated Storage Abstraction
+
+**Date:** 2026-06-30
+
+**Decision:**
+Do not couple Core to any specific storage implementation. Instead, expose a generic `StorageAdapter` interface, letting individual features decide which engine they require.
+
+**Reasoning:**
+Forcing dependency on specific engines (Hive, Isar, file system) limits usage flexibility (e.g. running in pure Web contexts, memory-only servers, or high-performance file systems) and increases binary size unnecessarily.
+
+**Alternatives considered:**
+1. Hardcode SQLite or Hive directly in core package.
+   - Rejected: Opinionated and forces unwanted transitive dependencies.
+
+**Pros:**
+- Fully decoupled.
+- Allows memory-only configurations.
+- Custom storage backends can be injected.
+
+**Cons:**
+- Feature plugins must implement or request their own storage bindings.
+
+---
+
+_Add new decisions above this line. Use sequential numbering: ADR-009, ADR-010, etc._

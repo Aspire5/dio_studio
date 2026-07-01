@@ -4,28 +4,25 @@ Track all features through their lifecycle stages.
 
 ## Completed
 
-| Feature | Description | Date Completed |
-| ------- | ----------- | -------------- |
-| Project foundation | Documentation system, coding standards, AI rules, decision tracking | 2026-06-30 |
+_None yet (Phase 1 setup in progress)._
 
 ## In Progress
 
-_No features in progress._
+| Feature | Description | Target Version |
+| ------- | ----------- | -------------- |
+| Phase 1: Foundation | Base context, topologically-sorted Plugin system, Event Bus, configurations, lints, and CI pipelines | `0.0.1` |
 
 ## Planned
 
 These features are committed to and will be implemented in upcoming phases.
 
-| Feature | Description | Priority | Notes |
-| ------- | ----------- | -------- | ----- |
-| Core setup | DioStudio class, Dio attachment, basic lifecycle | High | Foundation for all features |
-| Plugin system | Plugin interface, registration, lifecycle hooks | High | Enables extensibility |
-| API mocking | Mock responses without hitting real servers | High | Key developer experience feature |
-| API recording | Record real API traffic for later replay | Medium | Depends on core setup |
-| API replay | Replay recorded API traffic | Medium | Depends on recording |
-| Network simulation | Simulate latency, errors, throttling | Medium | Useful for testing edge cases |
-| Request inspector | Inspect and debug requests/responses | Medium | Developer tooling |
-| API testing utilities | Helpers for writing API tests | Medium | Testing support |
+| Feature | Description | Target Version | Priority |
+| ------- | ----------- | -------------- | -------- |
+| API Mocking | Dynamic response mocking engine | `0.1.0` | High |
+| API Recording & Replay | Traffic persistence and replay playback | `0.2.0` | High |
+| Network Simulation | Client-side latency, error rate, and throttle simulations | `0.5.0` | Medium |
+| DevTools Inspector | Telemetry visualization and search dashboard widget | `0.9.0` | Medium |
+| Production Release | Stable APIs, full test coverages, and pub.dev publication | `1.0.0` | High |
 
 ## Deferred
 

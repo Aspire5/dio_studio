@@ -1,0 +1,13 @@
+name: dio_studio_example
+description: An example demonstrating the setup and usage of dio_studio.
+publish_to: none
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  dio_studio:
+    path: ../
+
+dev_dependencies:
+  lints: ^5.1.1

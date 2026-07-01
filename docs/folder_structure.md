@@ -19,16 +19,34 @@ dio_studio/
 |   |-- development_log.md     # Chronological log of development activity
 |   |-- future_ideas.md        # Ideas for future exploration (not committed to)
 |   |-- migration_notes.md     # Notes for users migrating between versions
+|   |-- design_principles.md   # Core design principles of dio_studio
+|   |-- vision.md              # Mission, success criteria, and non-goals
+|   |-- api_stability.md       # API stability categorization references
+|
+|-- benchmarks/                # Performance benchmarks
+|   |-- results/               # Cached benchmark reports for comparison
 |
 |-- lib/
-|   |-- dio_studio.dart        # Barrel file. Exports the public API only
+|   |-- dio_studio.dart        # Unified entry point (exports public symbols & re-exports Dio)
 |   |-- src/                   # All implementation code lives here
-|       |-- (feature dirs)     # Grouped by feature: core/, plugins/, recording/, etc.
+|       |-- core/              # Shared core (context, Event Bus, logging, events)
+|           |-- events/        # Modular event categories
+|       |-- compatibility/     # Isolated version-specific layers
+|           |-- README.md      # Guidelines for future adapters
+|       |-- plugins/           # Base plugin structures and managers
+|       |-- features/          # Feature modules (isolated compile units)
+|           |-- mock/          # Mock engine modules
+|           |-- record/        # Recording/replay modules
+|           |-- network/       # Simulator modules
+|           |-- inspector/     # Inspector diagnostic tools
 |
 |-- test/
-|   |-- (mirrors lib/src/)     # Test files mirror source structure
+|   |-- unit/                  # Standard unit tests
+|   |-- integration/           # Lifecycle integration tests
+|   |-- performance/           # Stress and memory testing
+|   |-- compatibility/         # Drop-in upgrade validation
 |
-|-- example/                   # Usage examples (added when features exist)
+|-- example/                   # Showcase command-line / basic example
 |
 |-- CHANGELOG.md               # Version-by-version changelog
 |-- README.md                  # Package README for pub.dev
@@ -40,10 +58,10 @@ dio_studio/
 
 ## Conventions
 
-- `lib/dio_studio.dart` is the single barrel file. It exports only public API symbols.
+- `lib/dio_studio.dart` is the single barrel file. It exports only public API symbols and re-exports `package:dio/dio.dart`.
 - All implementation goes inside `lib/src/`. Never place implementation files directly in `lib/`.
-- Feature directories inside `lib/src/` group related files. Examples: `core/`, `plugins/`, `recording/`, `inspector/`, `mock/`, `simulation/`.
-- Test file paths mirror source file paths: `lib/src/core/config.dart` -> `test/src/core/config_test.dart`.
+- Feature directories inside `lib/src/features/` group related files.
+- Test file paths mirror source file paths under their respective subdirectories: `lib/src/core/context.dart` -> `test/unit/core/context_test.dart`.
 - Documentation lives in `docs/` and is always kept in sync with the codebase.
 
 ---

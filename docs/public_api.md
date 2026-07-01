@@ -6,31 +6,38 @@ Every addition, modification, or removal of a public API must be reflected here.
 
 ## Exported Classes
 
-_No classes exported yet. Implementation has not started._
+| Class | Purpose |
+| ----- | ------- |
+| `DioStudio` | Main controller for attaching and configuring developer features. |
+| `DioStudioConfig` | Immutable configuration options container. |
+| `DioStudioPlugin` | Base class for constructing custom extensions. |
+| `StudioContext` | Execution context interface exposed to plugins during initialization. |
+| `PluginMetadata` | Registration model containing plugin description and compatibility. |
 
-## Exported Functions
+## Exported Interface Mixins
 
-_No functions exported yet._
-
-## Exported Types / Enums
-
-_No types exported yet._
+| Mixin Interface | Purpose |
+| --------------- | ------- |
+| `RequestPlugin` | Hooks into request interception hot path. |
+| `ResponsePlugin` | Hooks into response interception hot path. |
+| `ErrorPlugin` | Hooks into error interception hot path. |
+| `LifecyclePlugin` | Provides initialization, state changes, and disposal notifications. |
 
 ## Exported Extensions
 
-_No extensions exported yet._
+| Extension | Target | Purpose |
+| --------- | ------ | ------- |
+| `DioStudioExtension` | `Dio` | Attaches `.studio` property and `.enableStudio()` initializer. |
+
+## Exported Types / Enums
+
+| Type | Target | Purpose |
+| ---- | ------ | ------- |
+| `StorageAdapter` | `interface class` | Unopinionated key-value storage abstraction. |
 
 ## Deprecated APIs
 
 _None._
-
-## API Design Principles
-
-- Keep the public surface area small. Only export what developers need.
-- Prefer named constructors and factory methods over multiple top-level classes.
-- Use abstract classes or interfaces for extensibility points (plugins, recorders).
-- All public APIs must have dartdoc comments.
-- All public APIs must have corresponding tests.
 
 ---
 

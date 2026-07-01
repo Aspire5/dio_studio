@@ -16,25 +16,53 @@ Developers should be able to:
 ## High-Level Architecture
 
 ```
-+------------------+
-|   Developer App  |
-+--------+---------+
-         |
-         v
-+------------------+
-|   dio_studio     |  <-- Toolkit layer
-|                  |
-|  - Interceptors  |
-|  - Plugins       |
-|  - Recorders     |
-|  - Inspectors    |
-+--------+---------+
-         |
-         v
-+------------------+
-|      Dio         |  <-- HTTP layer (not owned by us)
-+------------------+
++-------------------------------------------------------------------+
+|                           Public API                              |
+|   (package:dio_studio/dio_studio.dart)                            |
+|   - Re-exports package:dio/dio.dart                               |
+|   - DioStudio (high-level controller)                             |
+|   - DioStudioConfig (immutable configuration)                     |
+|   - DioStudioExtension (extension methods on Dio)                 |
++-----------------------------------+-------------------------------+
+                                    |
+                                    v
++-----------------------------------+-------------------------------+
+|                           Plugin API                              |
+|   - DioStudioPlugin (abstract base class)                         |
+|   - StudioContext (strongly-typed service provider)               |
+|   - Mixin interfaces: RequestPlugin, ResponsePlugin, etc.         |
++-----------------------------------+-------------------------------+
+                                    |
+                                    v
++-----------------------------------+-------------------------------+
+|                          Internal API                             |
+|   (lib/src/core/ - Hidden from outside consumers)                 |
+|   - StudioEventBus (lazy event dispatcher)                        |
+|   - PluginManager (topological plugin runner)                     |
+|   - StudioInterceptor (Dio-level bridge)                          |
+|   - StudioLogger (internal diagnostics framework)                 |
++-------------------------------------------------------------------+
 ```
+
+## Request Interception Pipeline
+
+To allow plugins to mutate requests and mock responses predictably, request-response execution runs **synchronously and in sequential order** managed by `PluginManager`.
+
+```
+[Dio Request]
+      ↓
+[StudioInterceptor]
+      ↓
+[PluginManager]  ─── (Executes plugins in topological & priority order)
+      ↓
+[Plugin A (e.g. Mocking)]  ─── (Can return mock response and short-circuit)
+      ↓
+[Plugin B (e.g. Latency Simulation)]  ─── (Injects artificial delay)
+      ↓
+[Target Server / Client]
+```
+
+The internal `StudioEventBus` operates in the background strictly for non-mutating side effects (such as updating telemetry, logs, or diagnostic UI components) and relies on lazy dispatch logic to avoid runtime memory allocations when no listeners are active.
 
 ## Design Decisions
 
@@ -42,27 +70,28 @@ Developers should be able to:
 - All features are opt-in. Nothing is forced on the developer.
 - The plugin system allows third-party extensions.
 - Recording and replay are separate concerns with separate APIs.
+- Context and storage adapters are isolated from the core network pipeline.
 
 ## Layers
 
 ### Public API Layer
-The top-level classes and functions developers interact with. Exported from `lib/dio_studio.dart`.
+The top-level classes and functions developers interact with. Exported from a single entry point: `lib/dio_studio.dart`.
 
 ### Plugin Layer
-The extension system. Plugins can hook into request/response lifecycle events. See `docs/plugins.md`.
+The extension system. Plugins are registered using mixin interfaces for type-safe execution.
 
 ### Interceptor Layer
 Dio interceptors that bridge dio_studio's features into Dio's pipeline.
 
 ### Core Layer
-Internal utilities, data models, and shared logic. Not exported publicly.
+Internal utilities, data models, event bus, diagnostic logger, and shared logic. Not exported publicly.
 
 ## Constraints
 
 - No global state. All state is scoped to a dio_studio instance.
 - No monkey-patching of Dio internals.
-- No dependency on Flutter framework (this is a pure Dart package that happens to be in a Flutter project).
 - Minimal external dependencies.
+- Virtually zero overhead when features are disabled.
 
 ---
 

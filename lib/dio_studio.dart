@@ -9,6 +9,24 @@
 /// See the docs/ directory for detailed documentation.
 library;
 
-// Public API exports will be added here as features are implemented.
-// All implementation lives in lib/src/. Only public-facing symbols
-// are exported from this file.
+// Re-export standard Dio HTTP package classes so users have a drop-in experience.
+export 'package:dio/dio.dart';
+
+// Core public configurations and controllers
+export 'src/core/config.dart' show DioStudioConfig, StudioFeature, StudioFeatures;
+export 'src/core/context.dart' show StudioContext;
+export 'src/core/storage.dart' show StorageAdapter;
+export 'src/core/studio.dart' show DioStudio;
+
+// Extensions
+export 'src/extensions/dio_extensions.dart' show DioStudioExtension;
+
+// Plugin APIs
+export 'src/plugins/plugin.dart'
+    show
+        DioStudioPlugin,
+        PluginMetadata,
+        RequestPlugin,
+        ResponsePlugin,
+        ErrorPlugin,
+        LifecyclePlugin;

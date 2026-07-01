@@ -1,0 +1,36 @@
+name: Dart CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze project source
+        run: dart analyze --fatal-infos --fatal-warnings
+
+      - name: Generate dartdoc documentation
+        run: dart doc --dry-run
+
+      - name: Run test suites
+        run: dart test
+
+      - name: Verify package configuration (pub.dev dry-run)
+        run: dart pub publish --dry-run
