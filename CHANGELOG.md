@@ -7,6 +7,16 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+## [0.0.3] - 2026-07-04
+
+### Added
+- Zero-configuration console request/response logging using static predefined `Logging` presets (`Logging.all`, `Logging.errorsOnly`, `Logging.none`).
+- Idempotent `Dio.enableStudio()` chained setup API for simple cascade configuration.
+- Internalized plugin registration logic, removing manual configurations from public bootstrap API parameters.
+- High-performance logging plugins utilizing native line-by-line `print` statements to bypass OS log truncations.
+- Formatted console summaries for multipart form data, preventing binary dumps.
+- Automatic body omission handling for payloads exceeding 100 KB to avoid console stutter.
+
 ## [0.0.2] - 2026-07-01
 
 ### Added

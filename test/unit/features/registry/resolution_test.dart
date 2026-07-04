@@ -33,10 +33,7 @@ void main() {
           .build(envProduction);
 
       dio.enableStudio(
-        config: DioStudioConfig(
-          enabled: true,
-          registry: registry,
-        ),
+        registry: registry,
       );
     });
 

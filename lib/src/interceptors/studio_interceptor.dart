@@ -14,11 +14,6 @@ class StudioInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    if (!_context.config.enabled) {
-      handler.next(options);
-      return;
-    }
-
     // Lazy Event Bus dispatch
     if (_context.eventBus.hasSubscribers(BeforeRequestEvent)) {
       _context.eventBus.fire(BeforeRequestEvent(options));
@@ -35,11 +30,6 @@ class StudioInterceptor extends Interceptor {
 
   @override
   void onResponse(Response<dynamic> response, ResponseInterceptorHandler handler) {
-    if (!_context.config.enabled) {
-      handler.next(response);
-      return;
-    }
-
     // Lazy Event Bus dispatch
     if (_context.eventBus.hasSubscribers(AfterResponseEvent)) {
       _context.eventBus.fire(AfterResponseEvent(response));
@@ -56,11 +46,6 @@ class StudioInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    if (!_context.config.enabled) {
-      handler.next(err);
-      return;
-    }
-
     final pipeline = _pluginManager.errorPipeline;
     for (var i = 0; i < pipeline.length; i++) {
       pipeline[i].onError(err, handler);

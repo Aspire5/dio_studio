@@ -241,4 +241,28 @@ Separating endpoint configuration from parameter injection ensures that endpoint
 
 ---
 
+## ADR-010: Built-in Logging Presets & Chained API Attachment
+
+**Date:** 2026-07-04
+
+**Decision:**
+Introduce zero-configuration console request/response logging enabled automatically in debug mode via a cascade initializer method (`Dio()..enableStudio()`). Predefine logging behaviors using immutable `Logging` presets (such as `Logging.all`, `Logging.errorsOnly`, and `Logging.none`). Register all plugins internally, removing direct plugin configuration array exposure from the public API.
+
+**Reasoning:**
+- **Zero-Ripple Migration:** Chaining `enableStudio` directly on the standard `Dio` instance lets developers integrate `dio_studio` without modifying type annotations or constructor signatures across their codebases.
+- **Improved DX/AI Autocomplete:** Using strongly typed constant presets instead of generic string/map configurations or `dynamic` values provides outstanding autocomplete features inside IDEs and maximizes success rates for automated code generators.
+- **Git Noise Reduction:** Consuming an optional local focus file (`lib/dio_logging.dart` via `logOnly`) prevents developers from polluting `main.dart` or bootstrap configurations with temporary debugging states.
+- **Performance Safeguard:** Splitting long messages and printing them line-by-line using native `print()` bypasses OS buffer truncation (such as logcat's 4KB block limits) and retains cross-platform support without requiring external package dependencies.
+
+**Pros:**
+- Tiny, discoverable public API boundary.
+- Guaranteed idempotent initialization.
+- Maximum IDE code completion and type safety.
+- Complete performance preservation and tree-shaking in release mode.
+
+**Cons:**
+- Developers cannot easily pass ad-hoc plugin instances during bootstrap (though custom plugin registrations can still be exposed via internal properties when needed).
+
+---
+
 _Add new decisions above this line. Use sequential numbering: ADR-009, ADR-010, etc._

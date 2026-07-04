@@ -10,6 +10,7 @@ Every addition, modification, or removal of a public API must be reflected here.
 | ----- | ------- |
 | `DioStudio` | Main controller for attaching and configuring developer features. |
 | `DioStudioConfig` | Immutable configuration options container. |
+| `Logging` | Immutable logging configuration presets (all, errorsOnly, none). |
 | `DioStudioPlugin` | Base class for constructing custom extensions. |
 | `StudioContext` | Execution context interface exposed to plugins during initialization. |
 | `PluginMetadata` | Registration model containing plugin description and compatibility. |
@@ -48,4 +49,4 @@ _None._
 
 ---
 
-Last updated: 2026-07-01
+Last updated: 2026-07-04

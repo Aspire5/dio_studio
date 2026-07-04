@@ -8,6 +8,7 @@ Track all features through their lifecycle stages.
 | ------- | ----------- | -------------- |
 | Phase 1: Foundation | Base context, topologically-sorted Plugin system, Event Bus, configurations, lints, and CI pipelines | `0.0.1` |
 | Phase 2: API Registry | Immutable environment/service URL lookup system with pre-compiled path template resolution and O(1) performance | `0.0.2` |
+| Phase 3: Built-in Logging | Zero-configuration Unicode logging presets with idempotent initialization and focus filtering | `0.0.3` |
 
 ## In Progress
 
@@ -43,4 +44,4 @@ Features that were considered and explicitly rejected.
 
 ---
 
-Last updated: 2026-07-01
+Last updated: 2026-07-04

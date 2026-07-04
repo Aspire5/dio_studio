@@ -1,4 +1,6 @@
+import '../features/logging/logging_presets.dart';
 import '../features/registry/registry.dart';
+import '../features/registry/endpoint.dart';
 
 /// Feature identifiers to toggle specific plugin sets.
 class StudioFeature {
@@ -27,13 +29,11 @@ abstract final class StudioFeatures {
 class DioStudioConfig {
   /// Create a new [DioStudioConfig] options instance.
   const DioStudioConfig({
-    this.enabled = true,
     this.enabledFeatures = const {},
     this.registry,
+    this.logging = Logging.all,
+    this.logOnly = const {},
   });
-
-  /// Master switch indicating if the developer studio is active.
-  final bool enabled;
 
   /// Active feature set to tree-shake or toggle capabilities at startup.
   final Set<StudioFeature> enabledFeatures;
@@ -41,16 +41,24 @@ class DioStudioConfig {
   /// The compile-time safe URL registry.
   final ApiRegistry? registry;
 
+  /// Active logging preset configuration.
+  final Logging logging;
+
+  /// Set of endpoint IDs for focus logging.
+  final Set<EndpointId> logOnly;
+
   /// Creates a copy of this config with the given fields replaced.
   DioStudioConfig copyWith({
-    bool? enabled,
     Set<StudioFeature>? enabledFeatures,
     ApiRegistry? registry,
+    Logging? logging,
+    Set<EndpointId>? logOnly,
   }) {
     return DioStudioConfig(
-      enabled: enabled ?? this.enabled,
       enabledFeatures: enabledFeatures ?? this.enabledFeatures,
       registry: registry ?? this.registry,
+      logging: logging ?? this.logging,
+      logOnly: logOnly ?? this.logOnly,
     );
   }
 }

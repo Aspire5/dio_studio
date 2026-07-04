@@ -4,6 +4,25 @@ Chronological record of all development activity on dio_studio.
 
 ---
 
+## 2026-07-04 - Phase 3: Built-in Logging System & API Chaining
+
+**What was done:**
+- Implemented built-in zero-configuration request/response logging using static predefined `Logging` presets (`Logging.all`, `Logging.errorsOnly`, `Logging.none`).
+- Refactored `DioStudio` lifecycle to support idempotent `initialize()` setup instead of dynamic enable/disable properties, removing redundant `enabled` flags from config.
+- Implemented `enableStudio()` extension on standard `Dio` instance using cascade chaining syntax (`Dio()..enableStudio()`) for Zero-Ripple migration.
+- Internalized plugin registration, removing `plugins` from public bootstrap API parameters.
+- Implemented `RequestLoggingPlugin`, `LogFilter`, `LogFormatter` with 100 KB payload bounds and multipart Form summaries, and `LogWriter` utilizing native line-by-line `print` to prevent OS buffer truncations.
+- Documented decisions under ADR-010.
+- Resolved all issues and achieved 100% test coverage with 30 passing tests.
+
+**Decisions made:**
+- ADR-010: Built-in Logging Presets & Chained API Attachment.
+
+**Notes:**
+Phase 3 is fully complete. All tests pass successfully. Ready to plan Phase 4.
+
+---
+
 ## 2026-07-01 - Phase 2: API Registry System
 
 **What was done:**

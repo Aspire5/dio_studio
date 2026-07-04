@@ -66,33 +66,18 @@ The internal `StudioEventBus` operates in the background strictly for non-mutati
 
 ## Design Decisions
 
-- dio_studio attaches to Dio via Dio's interceptor system.
-- All features are opt-in. Nothing is forced on the developer.
-- The plugin system allows third-party extensions.
-- Recording and replay are separate concerns with separate APIs.
-- Context and storage adapters are isolated from the core network pipeline.
-
-## Layers
-
-### Public API Layer
-The top-level classes and functions developers interact with. Exported from a single entry point: `lib/dio_studio.dart`.
-
-### Plugin Layer
-The extension system. Plugins are registered using mixin interfaces for type-safe execution.
-
-### Interceptor Layer
-Dio interceptors that bridge dio_studio's features into Dio's pipeline.
-
-### Core Layer
-Internal utilities, data models, event bus, diagnostic logger, and shared logic. Not exported publicly.
+- dio_studio attaches to Dio via Dio's interceptor system and standard extensions.
+- Zero-configuration built-in logging is active in debug mode by default and automatically tree-shaken in production.
+- Plugins are registered internally during the idempotent initialization phase.
+- Storage adapters and context providers are isolated from the core network pipeline.
 
 ## Constraints
 
 - No global state. All state is scoped to a dio_studio instance.
 - No monkey-patching of Dio internals.
 - Minimal external dependencies.
-- Virtually zero overhead when features are disabled.
+- Virtually zero overhead in release builds.
 
 ---
 
-Last updated: 2026-06-30
+Last updated: 2026-07-04

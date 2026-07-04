@@ -29,9 +29,9 @@ class StubRequestPlugin extends DioStudioPlugin implements RequestPlugin {
 
 void main() {
   group('StudioInterceptor', () {
-    test('forwards to pipeline if enabled', () async {
+    test('forwards to pipeline if attached', () async {
       final dio = Dio();
-      const config = DioStudioConfig(enabled: true);
+      const config = DioStudioConfig();
       final logger = StudioLogger();
       final eventBus = StudioEventBus();
       
@@ -62,39 +62,6 @@ void main() {
       }
 
       expect(intercepted, isTrue);
-    });
-
-    test('bypasses pipeline if disabled', () async {
-      final dio = Dio();
-      const config = DioStudioConfig(enabled: false);
-      final logger = StudioLogger();
-      final eventBus = StudioEventBus();
-      
-      var intercepted = false;
-      final stub = StubRequestPlugin(
-        onRequestCallback: (options, handler) {
-          intercepted = true;
-          handler.next(options);
-        },
-      );
-
-      final pluginManager = PluginManager([stub]);
-      final context = StudioContext(
-        dio: dio,
-        config: config,
-        logger: logger,
-        eventBus: eventBus,
-      );
-
-      pluginManager.init(context);
-      final interceptor = StudioInterceptor(context, pluginManager);
-      dio.interceptors.add(interceptor);
-
-      try {
-        await dio.get('https://example.com');
-      } catch (_) {}
-
-      expect(intercepted, isFalse);
     });
   });
 }

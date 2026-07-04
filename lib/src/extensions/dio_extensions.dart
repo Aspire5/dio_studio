@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import '../core/config.dart';
 import '../core/studio.dart';
-import '../plugins/plugin.dart';
+import '../features/logging/logging_presets.dart';
+import '../features/registry/endpoint.dart';
+import '../features/registry/registry.dart';
 
 /// Extension methods for attaching [DioStudio] directly to [Dio] client instances.
 extension DioStudioExtension on Dio {
@@ -22,22 +23,21 @@ extension DioStudioExtension on Dio {
 
   /// Convenience initializer to configure and enable dio_studio on this client.
   ///
-  /// Pass [config] to customize features, and [plugins] to register custom components.
+  /// Safe to call multiple times (idempotent).
   /// Returns the [Dio] instance for cascade chaining.
   Dio enableStudio({
-    DioStudioConfig config = const DioStudioConfig(),
-    List<DioStudioPlugin> plugins = const [],
+    ApiRegistry? registry,
+    Logging logging = Logging.all,
+    Set<EndpointId> logOnly = const {},
   }) {
-    // 1. Register all plugins first while studio is still inactive.
-    for (final plugin in plugins) {
-      studio.registerPlugin(plugin);
+    if (studio.isInitialized) {
+      return this;
     }
-    // 2. Load configuration options.
-    studio.configure(config);
-    // 3. Enable execution loops if config specifies it.
-    if (config.enabled) {
-      studio.enable();
-    }
+    studio.initialize(
+      registry: registry,
+      logging: logging,
+      logOnly: logOnly,
+    );
     return this;
   }
 }

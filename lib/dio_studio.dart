@@ -21,6 +21,9 @@ export 'src/core/studio.dart' show DioStudio;
 // Extensions
 export 'src/extensions/dio_extensions.dart' show DioStudioExtension;
 
+// Logging Features
+export 'src/features/logging/logging_presets.dart' show Logging;
+
 // Plugin APIs
 export 'src/plugins/plugin.dart'
     show
