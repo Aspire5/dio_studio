@@ -19,6 +19,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Compile-time safe identifier extension types: `EnvironmentId`, `ServiceId`, and `EndpointId`.
 - Options extension helper method `Options.withPathParams()` for cleanly passing path parameter arguments.
 
+### Changed
+- Configured repository to use the official MIT License for public release under the copyright holder "Shagun Kumar".
+
 > [!NOTE]
 > This is the initial public preview release of `dio_more`. Community feedback may result in minor breaking API changes before the official stable 1.0.0 release.
 

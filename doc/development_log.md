@@ -4,6 +4,22 @@ Chronological record of all development activity on dio_more.
 
 ---
 
+## 2026-07-04 - Licensing Setup
+
+**What was done:**
+- Configured repository to use the MIT License for the upcoming public release.
+- Added official MIT License text to the root `LICENSE` file under the copyright holder "Shagun Kumar" (2026).
+- Updated the `README.md` file with a concise License section referencing the `LICENSE` file.
+- Verified metadata in `pubspec.yaml` satisfies pub.dev license requirements and contains no deprecated fields.
+
+**Decisions made:**
+- None.
+
+**Notes:**
+- Licensing configuration is complete and ready for public release.
+
+---
+
 ## 2026-07-04 - Phase 3: Built-in Logging System & API Chaining
 
 **What was done:**
