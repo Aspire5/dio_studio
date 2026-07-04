@@ -2,7 +2,7 @@ name: dio_more
 description: >
   A developer toolkit built on top of Dio providing structured visual console logging
   and type-safe API endpoint registry management.
-version: 0.9.0
+version: 0.9.0+1
 homepage: https://github.com/Aspire5/dio_more
 repository: https://github.com/Aspire5/dio_more
 issue_tracker: https://github.com/Aspire5/dio_more/issues

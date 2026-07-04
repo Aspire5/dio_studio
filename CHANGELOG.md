@@ -5,6 +5,13 @@ All notable changes to dio_more are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/0.9.0/).
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0+1] - 2026-07-04
+
+### Changed
+- Restructured package examples into a canonical `example/example.dart` at the root of the example folder to ensure proper pub.dev automatic detection and rendering.
+- Optimized barrel file exports to hide advanced internal Dio helper classes from the documentation footprint.
+- Added missing constructor documentation to `ApiRegistryBuilder` class to maximize pub.dev analysis score.
+
 ## [0.9.0] - 2026-07-04
 
 ### Added
