@@ -1,4 +1,5 @@
 import 'package:dio_studio/dio_studio.dart';
+import 'package:dio_studio/src/features/registry/endpoint.dart';
 import 'package:test/test.dart';
 
 void main() {

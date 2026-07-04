@@ -1,18 +1,18 @@
 name: dio_studio
 description: >
-  A developer toolkit built on top of Dio providing API mocking, recording,
-  replay, network simulation, testing, and request inspection.
-version: 0.0.1
+  A developer toolkit built on top of Dio providing structured visual console logging
+  and type-safe API endpoint registry management.
+version: 1.0.0
 homepage: https://github.com/Aspire5/dio_studio
 repository: https://github.com/Aspire5/dio_studio
 issue_tracker: https://github.com/Aspire5/dio_studio/issues
 
 topics:
   - dio
-  - mocking
-  - testing
+  - logging
+  - debugging
   - http
-  - developer-tools
+  - network
 
 environment:
   sdk: ^3.9.2

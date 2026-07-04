@@ -1,0 +1,7 @@
+# Exclude internal/development directories from pub.dev archive
+.github/
+.agents/
+assets/
+benchmark/
+doc/
+test/

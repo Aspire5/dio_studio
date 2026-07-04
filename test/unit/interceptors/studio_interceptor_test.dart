@@ -1,7 +1,9 @@
 import 'package:dio_studio/dio_studio.dart';
+import 'package:dio_studio/src/core/context.dart';
 import 'package:dio_studio/src/core/event_bus.dart';
 import 'package:dio_studio/src/core/logger.dart';
 import 'package:dio_studio/src/interceptors/studio_interceptor.dart';
+import 'package:dio_studio/src/plugins/plugin.dart';
 import 'package:dio_studio/src/plugins/plugin_manager.dart';
 import 'package:test/test.dart';
 

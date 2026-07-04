@@ -1,4 +1,5 @@
 import 'package:dio_studio/dio_studio.dart';
+import 'package:dio_studio/src/core/context.dart';
 import 'package:dio_studio/src/core/event_bus.dart';
 import 'package:dio_studio/src/core/logger.dart';
 import 'package:test/test.dart';

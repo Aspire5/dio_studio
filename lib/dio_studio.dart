@@ -13,10 +13,7 @@ library;
 export 'package:dio/dio.dart';
 
 // Core public configurations and controllers
-export 'src/core/config.dart'
-    show DioStudioConfig, StudioFeature, StudioFeatures;
-export 'src/core/context.dart' show StudioContext;
-export 'src/core/storage.dart' show StorageAdapter;
+export 'src/core/config.dart' show DioStudioConfig;
 export 'src/core/studio.dart' show DioStudio;
 
 // Extensions
@@ -25,19 +22,8 @@ export 'src/extensions/dio_extensions.dart' show DioStudioExtension;
 // Logging Features
 export 'src/features/logging/logging_presets.dart' show Logging;
 
-// Plugin APIs
-export 'src/plugins/plugin.dart'
-    show
-        DioStudioPlugin,
-        PluginMetadata,
-        RequestPlugin,
-        ResponsePlugin,
-        ErrorPlugin,
-        LifecyclePlugin;
-
 // Registry Features
-export 'src/features/registry/endpoint.dart'
-    show EndpointId, EndpointDefinition;
+export 'src/features/registry/endpoint.dart' show EndpointId;
 export 'src/features/registry/registry.dart'
     show
         EnvironmentId,

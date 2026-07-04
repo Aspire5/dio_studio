@@ -1,67 +1,201 @@
 # dio_studio
 
-A developer toolkit built on top of [Dio](https://pub.dev/packages/dio).
+[![pub package](https://img.shields.io/pub/v/dio_studio.svg)](https://pub.dev/packages/dio_studio)
+[![Build Status](https://github.com/Aspire5/dio_studio/workflows/Dart%20CI/badge.svg)](https://github.com/Aspire5/dio_studio/actions)
+[![Platform Support](https://img.shields.io/badge/platform-flutter%20%7C%20dart-blue.svg)](https://pub.dev/packages/dio_studio)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-dio_studio is **not** another HTTP client. It extends Dio with tools for API integration, mocking, recording, replay, network simulation, testing, and request inspection.
+A developer toolkit built on top of [Dio](https://pub.dev/packages/dio) for structured console logging and type-safe API endpoint management.
 
-## Status
+`dio_studio` is **not** a replacement HTTP client. It attaches to your existing `Dio` instance as a clean sidecar, boosting your debugging and URL routing workflow with zero code-generation.
 
-This package is in early development. The public API is not yet stable.
+---
 
-## Goals
+## Why dio_studio?
 
-- Improve developer experience when working with HTTP APIs.
-- Provide API mocking for development and testing without hitting real servers.
-- Record and replay API traffic for reproducible testing.
-- Simulate network conditions (latency, errors, throttling).
-- Inspect and debug requests and responses.
-- Support a plugin architecture for community extensibility.
+| Feature | Plain Dio | `pretty_dio_logger` | `dio_studio` |
+| :--- | :--- | :--- | :--- |
+| **Console Formatting** | No standard format | Unicode boxes | Unicode boxes + line-by-line printing |
+| **Line Truncation Protection**| No | No (logs get truncated on Android/OS limits) | **Yes** (split-printed, preserves alignment) |
+| **Payload Size Protection** | No | No (causes terminal hang on large payloads) | **Yes** (bodies > 100 KB are automatically summarized) |
+| **Security Redaction** | No | No | **Yes** (masks keys, cookie data, auth tokens) |
+| **Endpoint Registry** | String-only URLs | String-only URLs | **Yes** (O(1) compiled paths and parameters resolution) |
+| **Onboarding Cost** | N/A | Add Interceptor | **Cascade method:** `Dio()..enableStudio()` |
 
-## Design Principles
-
-- **Extends, never replaces.** dio_studio attaches to your existing Dio instance. Remove it anytime without changing your HTTP layer.
-- **Opt-in features.** Nothing is enabled by default. Use only what you need.
-- **No global state.** All state is scoped to a dio_studio instance.
-- **Plugin-based.** Extensible through a plugin system for custom behaviors.
+---
 
 ## Installation
 
+Add `dio_studio` to your `pubspec.yaml`:
+
 ```yaml
 dependencies:
-  dio_studio:
-    git:
-      url: https://github.com/your-org/dio_studio.git
+  dio: ^5.0.0
+  dio_studio: ^1.0.0
 ```
 
-_pub.dev publishing will happen when the API stabilizes._
+Or run:
 
-## Usage
+```bash
+dart pub add dio_studio
+```
 
-_Usage examples will be added as features are implemented._
+---
 
-## Documentation
+## Quick Start
 
-See the [docs/](docs/) directory for detailed documentation:
+Enable visual console logging with default presets using cascade setup:
 
-- [Architecture](docs/architecture.md)
-- [Public API](docs/public_api.md)
-- [Folder Structure](docs/folder_structure.md)
-- [Decisions](docs/decisions.md)
-- [Roadmap](docs/roadmap.md)
-- [Plugin System](docs/plugins.md)
-- [Coding Guidelines](docs/coding_guidelines.md)
-- [Development Log](docs/development_log.md)
+```dart
+import 'package:dio_studio/dio_studio.dart';
+
+void main() async {
+  final dio = Dio()..enableStudio();
+
+  // Your request logs will print as aligned, readable visual boxes in the console
+  await dio.get('https://pub.dev/api/packages/dio_studio');
+}
+```
+
+---
+
+## Migration from Dio
+
+Since `dio_studio` extends `Dio` via extensions, **no changes** are required to your existing network requests code. Simply add `..enableStudio()` to your client initialization:
+
+```diff
+- final dio = Dio();
++ final dio = Dio()..enableStudio();
+```
+
+---
+
+## Feature Overview
+
+### 1. API Endpoint Registry
+
+Stop managing raw URL strings across your views or repositories. Compile paths with templates and route parameters safely in constant time.
+
+```dart
+// 1. Define logical endpoint IDs
+const getPackage = EndpointId('pub.get_package');
+
+// 2. Build the API registry compiling path templates
+final registry = ApiRegistry.builder()
+    .environment(EnvironmentId('production'), baseUrl: 'https://pub.dev')
+    .service(const ServiceId('pub_api'), path: '/api')
+    .endpoint(
+      id: getPackage,
+      path: '/packages/{name}',
+      service: const ServiceId('pub_api'),
+    )
+    .build(EnvironmentId('production'));
+
+// 3. Attach it to your Dio instance
+final dio = Dio()..enableStudio(registry: registry);
+
+// 4. Fire requests using the logical Endpoint ID in place of the path
+await dio.get(
+  'pub.get_package',
+  options: Options()..withParams({'name': 'dio_studio'}),
+);
+```
+
+### 2. Beautiful Built-in Logging
+
+Outputs premium box layouts. Correlation indexes (`[Req#001]`, `[Res#001]`) allow you to track async operations without confusion.
+
+#### Configuration Presets
+- `Logging.all`: Logs request details, response details, errors, and round-trip durations (default).
+- `Logging.errorsOnly`: Logs only failing requests, leaving successful ones silent in the console.
+- `Logging.none`: Disables console logging output completely.
+
+```dart
+final dio = Dio()
+  ..enableStudio(
+    logging: Logging.errorsOnly, // Log errors only
+  );
+```
+
+#### Focused Endpoint Logging
+Only print console logs for specific endpoints you are currently debugging by defining the `logOnly` focus set:
+
+```dart
+final dio = Dio()
+  ..enableStudio(
+    registry: registry,
+    logOnly: {getPackage}, // Logs from other endpoints are silenced
+  );
+```
+
+---
+
+## Example Outputs
+
+### Request Log
+```text
+┌── [Req#001] GET https://pub.dev/api/packages/dio_studio
+│   Endpoint: pub.get_package (Environment: production)
+│   Headers:
+│     Authorization: ******
+│   Body:
+│     [Empty Body]
+└──────────────────────────────────────────────────────────
+```
+
+### Response Log
+```text
+┌── [Res#001] 200 OK (180ms)
+│   Headers:
+│     content-type: application/json; charset=utf-8
+│   Body:
+│     {
+│       "name": "dio_studio",
+│       "version": "1.0.0"
+│     }
+│   Performance:
+│     Duration: 180 ms
+│     Payload Size: 45 B
+└──────────────────────────────────────────────────────────
+```
+
+---
+
+## Examples
+
+Check out the executable standalone examples inside the `example/bin/` directory:
+- [01_zero_setup.dart](example/bin/01_zero_setup.dart): Drop-in cascade logger setup.
+- [02_endpoint_registry.dart](example/bin/02_endpoint_registry.dart): Compiling template paths and resolving parameters.
+- [03_log_only.dart](example/bin/03_log_only.dart): Focused debugging using logOnly filters.
+- [04_error_logging.dart](example/bin/04_error_logging.dart): Redirecting logging levels to track errors only.
+
+---
+
+## FAQ
+
+#### Does this impact production performance?
+No. `dio_studio` uses compile-time checks (`dart.vm.product` / `dart.vm.profile`) to completely tree-shake and strip out logging code, formats, and writers from release builds, guaranteeing **zero runtime overhead** in production.
+
+#### Does this replace Dio?
+No. It attaches onto any standard `Dio` instance without overriding the default core behaviors of your client.
+
+---
+
+## API Stability
+
+`dio_studio` adheres strictly to **Semantic Versioning (SemVer)** principles:
+- **Major versions (`1.x.y`)** represent stable APIs. Breaking changes will only be introduced at major increments.
+- **Minor versions (`1.x.y`)** introduce backwards-compatible features (such as opt-in simulators).
+- **Patch versions (`1.0.x`)** introduce bug fixes, layout formatting corrections, and documentation syncs.
+
+---
 
 ## Contributing
 
-This project follows strict documentation and coding standards. Read the following before contributing:
+We welcome contributions! Please review our [CONTRIBUTING.md](CONTRIBUTING.md) and [architecture guidelines](docs/architecture.md) before submitting pull requests.
 
-1. [Coding Guidelines](docs/coding_guidelines.md)
-2. [Architecture](docs/architecture.md)
-3. [Decisions](docs/decisions.md)
-
-Every code change must include corresponding documentation updates.
+---
 
 ## License
 
-See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

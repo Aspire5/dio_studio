@@ -5,17 +5,19 @@ All notable changes to dio_studio are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-
-## [0.0.3] - 2026-07-04
+## [1.0.0] - 2026-07-04
 
 ### Added
+- **First Stable Release** focusing on API Endpoint Management and Beautiful Console Logging.
 - Zero-configuration console request/response logging using static predefined `Logging` presets (`Logging.all`, `Logging.errorsOnly`, `Logging.none`).
 - Idempotent `Dio.enableStudio()` chained setup API for simple cascade configuration.
 - Internalized plugin registration logic, removing manual configurations from public bootstrap API parameters.
 - High-performance logging plugins utilizing native line-by-line `print` statements to bypass OS log truncations.
-- Formatted console summaries for multipart form data, preventing binary dumps.
-- Automatic body omission handling for payloads exceeding 100 KB to avoid console stutter.
+- Auto-redaction of sensitive header credentials (`Authorization`, `Cookie`, `Set-Cookie`, `ApiKey`, `X-API-Key`).
+- Safe payload size guard omitting bodies over 100 KB, and metadata logs for binary or stream responses.
+- Immutable `ApiRegistry` and `ApiRegistryBuilder` supporting environment management, multiple services, and pre-compiled endpoint path template segments.
+- Compile-time safe identifier extension types: `EnvironmentId`, `ServiceId`, and `EndpointId`.
+- Options extension helper method `Options.withParams()` for cleanly passing path parameter arguments.
 
 ## [0.0.2] - 2026-07-01
 
