@@ -21,6 +21,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Changed
 - Configured repository to use the official MIT License for public release under the copyright holder "Shagun Kumar".
+- Fixed short-circuit bug in `RequestLoggingPlugin` by removing manual `handler.next` calls, enabling multi-plugin sequential execution.
+- Removed unused internal event classes (`RequestCancelledEvent`, `ConnectionThrottledEvent`, `StudioInitializedEvent`, `ConfigChangedEvent`) to prune dead code.
+- Synced README examples to use the correct `:` path parameter template format.
 
 > [!NOTE]
 > This is the initial public preview release of `dio_more`. Community feedback may result in minor breaking API changes before the official stable 1.0.0 release.

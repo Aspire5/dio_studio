@@ -8,7 +8,7 @@ dio_more/
 |-- .agents/
 |   |-- AGENTS.md              # AI collaboration rules for this project
 |
-|-- docs/
+|-- doc/
 |   |-- architecture.md        # High-level architecture and design
 |   |-- public_api.md          # Catalog of all exported public APIs
 |   |-- folder_structure.md    # This file. Project layout reference
@@ -63,8 +63,9 @@ dio_more/
 - All implementation goes inside `lib/src/`. Never place implementation files directly in `lib/`.
 - Feature directories inside `lib/src/features/` group related files.
 - Test file paths mirror source file paths under their respective subdirectories: `lib/src/core/context.dart` -> `test/unit/core/context_test.dart`.
-- Documentation lives in `docs/` and is always kept in sync with the codebase.
+- Documentation lives in `doc/` and is always kept in sync with the codebase.
 
 ---
 
-Last updated: 2026-06-30
+Last updated: 2026-07-04
+

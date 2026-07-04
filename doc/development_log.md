@@ -4,6 +4,24 @@ Chronological record of all development activity on dio_more.
 
 ---
 
+## 2026-07-04 - Release Audit & API Spacing Sync
+
+**What was done:**
+- Fixed a pipeline short-circuit architectural bug in `RequestLoggingPlugin` by removing pre-mature `handler.next` calls, enabling multi-plugin sequential execution in `StudioInterceptor`.
+- Cleaned up internal dead code by deleting unused event files (`network_events.dart` and `system_events.dart`) and classes (`RequestCancelledEvent`).
+- Fixed path parameter format mismatch in `README.md` to use `:name` to align with the core regex-based template parser.
+- Corrected directory references to `doc/` instead of `docs/` in `folder_structure.md`.
+- Ran static analysis, `dart test` and dry-run packaging checks; verified 0 errors or warnings.
+
+**Decisions made:**
+- None.
+
+**Notes:**
+- Codebase, documentation, and package metadata are fully audit-compliant and ready for publishing.
+
+---
+
+
 ## 2026-07-04 - Licensing Setup
 
 **What was done:**

@@ -14,15 +14,3 @@ class BeforeRequestEvent extends StudioEvent {
   /// Request configuration options.
   final RequestOptions options;
 }
-
-/// Fired if a request is explicitly cancelled.
-class RequestCancelledEvent extends StudioEvent {
-  /// Create a [RequestCancelledEvent] with [options] and [reason].
-  const RequestCancelledEvent(this.options, this.reason);
-
-  /// Request configuration options.
-  final RequestOptions options;
-
-  /// Reason why the request was cancelled.
-  final Object? reason;
-}

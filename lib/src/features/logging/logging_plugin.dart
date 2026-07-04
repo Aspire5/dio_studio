@@ -60,8 +60,6 @@ class RequestLoggingPlugin extends DioStudioPlugin
       final logText = LogFormatter.formatRequest(options, reqId);
       LogWriter.printLog(logText);
     }
-
-    handler.next(options);
   }
 
   @override
@@ -84,8 +82,6 @@ class RequestLoggingPlugin extends DioStudioPlugin
       final logText = LogFormatter.formatResponse(response, reqId, duration);
       LogWriter.printLog(logText);
     }
-
-    handler.next(response);
   }
 
   @override
@@ -104,7 +100,5 @@ class RequestLoggingPlugin extends DioStudioPlugin
       final logText = LogFormatter.formatError(err, reqId, duration);
       LogWriter.printLog(logText);
     }
-
-    handler.next(err);
   }
 }

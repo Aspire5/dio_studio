@@ -86,7 +86,7 @@ final registry = ApiRegistry.builder()
     .service(const ServiceId('pub_api'), path: '/api')
     .endpoint(
       id: getPackage,
-      path: '/packages/{name}',
+      path: '/packages/:name',
       service: const ServiceId('pub_api'),
     )
     .build(EnvironmentId('production'));
