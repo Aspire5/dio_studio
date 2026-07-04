@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:dio_studio/dio_studio.dart';
+import 'package:dio_more/dio_more.dart';
 
 void main() async {
   // 1. Initialize Studio to log ONLY errors, suppressing successful request details
@@ -12,7 +12,7 @@ void main() async {
   // ignore: avoid_print
   print('\nTriggering successful request (will be silent)...');
   try {
-    await dio.get('https://pub.dev/api/packages/dio_studio');
+    await dio.get('https://pub.dev/api/packages/dio_more');
   } catch (_) {}
 
   // 3. Failing request: WILL print beautiful red error box log details

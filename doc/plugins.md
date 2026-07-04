@@ -2,12 +2,12 @@
 
 ## Overview
 
-dio_studio uses a plugin architecture to keep the core small and allow extensibility. Plugins can hook into the request/response lifecycle and add custom behavior.
+dio_more uses a plugin architecture to keep the core small and allow extensibility. Plugins can hook into the request/response lifecycle and add custom behavior.
 
 ## Design Goals
 
 - Plugins are self-contained units of functionality.
-- Plugins can be first-party (shipped with dio_studio) or third-party (community-built).
+- Plugins can be first-party (shipped with dio_more) or third-party (community-built).
 - Plugins are registered explicitly by the developer. No auto-discovery.
 - Plugins have access to lifecycle hooks but cannot break core functionality.
 - Plugin order matters. Plugins execute in registration order.
@@ -22,7 +22,7 @@ The plugin interface will likely include:
 - `onRequest` - Called before a request is sent.
 - `onResponse` - Called after a response is received.
 - `onError` - Called when an error occurs.
-- `onDispose` - Called when dio_studio is disposed.
+- `onDispose` - Called when dio_more is disposed.
 
 ## Plugin Registration
 
@@ -44,7 +44,7 @@ final studio = DioStudio(
 
 ## First-Party Plugins
 
-These plugins will ship with dio_studio:
+These plugins will ship with dio_more:
 
 | Plugin | Purpose | Status |
 | ------ | ------- | ------ |

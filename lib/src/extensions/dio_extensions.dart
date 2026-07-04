@@ -21,7 +21,7 @@ extension DioStudioExtension on Dio {
     return instance;
   }
 
-  /// Convenience initializer to configure and enable dio_studio on this client.
+  /// Convenience initializer to configure and enable dio_more on this client.
   ///
   /// Safe to call multiple times (idempotent).
   /// Returns the [Dio] instance for cascade chaining.

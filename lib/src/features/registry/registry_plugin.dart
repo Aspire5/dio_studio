@@ -14,13 +14,13 @@ class ApiRegistryPlugin extends DioStudioPlugin
 
   @override
   PluginMetadata get metadata => const PluginMetadata(
-    id: 'dio_studio.registry',
+    id: 'dio_more.registry',
     name: 'API Registry Plugin',
-    version: '1.0.0',
+    version: '0.9.0',
     author: 'Antigravity Team',
     description:
         'Resolves registry endpoint paths, base URLs, and path parameters in constant time.',
-    minStudioVersion: '1.0.0',
+    minStudioVersion: '0.9.0',
     supportedDioVersion: '5.x.x',
   );
 

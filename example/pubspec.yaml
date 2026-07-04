@@ -1,12 +1,12 @@
-name: dio_studio_example
-description: An example demonstrating the setup and usage of dio_studio.
+name: dio_more_example
+description: An example demonstrating the setup and usage of dio_more.
 publish_to: none
 
 environment:
   sdk: ^3.9.2
 
 dependencies:
-  dio_studio:
+  dio_more:
     path: ../
 
 dev_dependencies:

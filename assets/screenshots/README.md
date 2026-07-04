@@ -1,6 +1,6 @@
 # Screenshot Generation and Reproducibility Guide
 
-Use this document to generate and maintain consistent, premium-looking visual assets for the `dio_studio` repository.
+Use this document to generate and maintain consistent, premium-looking visual assets for the `dio_more` repository.
 
 ---
 
@@ -20,7 +20,7 @@ Use this document to generate and maintain consistent, premium-looking visual as
 - **Expected Output:**
   ```text
   === Run Example 01: Zero Setup ===
-  ┌── [Req#001] GET https://pub.dev/api/packages/dio_studio
+  ┌── [Req#001] GET https://pub.dev/api/packages/dio_more
   │   Headers:
   │     None
   │   Body:
@@ -35,7 +35,7 @@ Use this document to generate and maintain consistent, premium-looking visual as
 - **Expected Output:**
   ```text
   === Run Example 02: Endpoint Registry ===
-  ┌── [Req#001] GET https://pub.dev/api/packages/dio_studio
+  ┌── [Req#001] GET https://pub.dev/api/packages/dio_more
   │   Endpoint: pub.get_package (Environment: production)
   │   Headers:
   │     None

@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 
 void main() {
-  group('dio_studio', () {
+  group('dio_more', () {
     // Tests will be added here as public APIs are implemented.
     // This file verifies that the library can be imported without errors.
     test('library can be imported', () {

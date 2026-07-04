@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:dio_studio/dio_studio.dart';
+import 'package:dio_more/dio_more.dart';
 
 void main() async {
   const getPackage = EndpointId('pub.get_package');

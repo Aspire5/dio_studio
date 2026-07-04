@@ -7,12 +7,12 @@ Developing, testing, and debugging network communication layers in Flutter/Dart 
 - Simulating poor connectivity, network errors, or throttled latency requires external proxy tools that are hard to automate in test pipelines.
 - Inspecting active request telemetry is scattered across standard system logs or custom console prints.
 
-`dio_studio` addresses this by consolidating these developer workflows into a single, unified, extensible toolkit built directly on top of the popular `Dio` package.
+`dio_more` addresses this by consolidating these developer workflows into a single, unified, extensible toolkit built directly on top of the popular `Dio` package.
 
 ---
 
-## Why dio_studio Exists
-`dio_studio` exists to provide an **integrated, lightweight developer workspace** directly within the application's network layer. It enables developers to record traffic, serve mocks, simulate environment hazards, and inspect telemetry with zero friction, while remaining entirely transparent to standard HTTP client operations.
+## Why dio_more Exists
+`dio_more` exists to provide an **integrated, lightweight developer workspace** directly within the application's network layer. It enables developers to record traffic, serve mocks, simulate environment hazards, and inspect telemetry with zero friction, while remaining entirely transparent to standard HTTP client operations.
 
 ---
 

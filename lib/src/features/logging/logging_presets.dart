@@ -1,4 +1,4 @@
-/// Configuration for console logging in `dio_studio`.
+/// Configuration for console logging in `dio_more`.
 ///
 /// Exposes predefined immutable presets (e.g., [Logging.all], [Logging.errorsOnly],
 /// and [Logging.none]) to simplify developer setup and provide autocompletion.

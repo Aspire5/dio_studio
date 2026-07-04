@@ -1,7 +1,7 @@
-import 'package:dio_studio/dio_studio.dart';
-import 'package:dio_studio/src/core/context.dart';
-import 'package:dio_studio/src/core/event_bus.dart';
-import 'package:dio_studio/src/core/logger.dart';
+import 'package:dio_more/dio_more.dart';
+import 'package:dio_more/src/core/context.dart';
+import 'package:dio_more/src/core/event_bus.dart';
+import 'package:dio_more/src/core/logger.dart';
 import 'package:test/test.dart';
 
 void main() {

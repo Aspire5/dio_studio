@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:dio_studio/dio_studio.dart';
+import 'package:dio_more/dio_more.dart';
 
 void main() async {
   // 1. Define logical EndpointIds
@@ -29,7 +29,7 @@ void main() async {
   try {
     await dio.get(
       'pub.get_package',
-      options: Options()..withPathParams({'name': 'dio_studio'}),
+      options: Options()..withPathParams({'name': 'dio_more'}),
     );
   } catch (e) {
     // ignore: avoid_print

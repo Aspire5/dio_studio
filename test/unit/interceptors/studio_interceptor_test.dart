@@ -1,10 +1,10 @@
-import 'package:dio_studio/dio_studio.dart';
-import 'package:dio_studio/src/core/context.dart';
-import 'package:dio_studio/src/core/event_bus.dart';
-import 'package:dio_studio/src/core/logger.dart';
-import 'package:dio_studio/src/interceptors/studio_interceptor.dart';
-import 'package:dio_studio/src/plugins/plugin.dart';
-import 'package:dio_studio/src/plugins/plugin_manager.dart';
+import 'package:dio_more/dio_more.dart';
+import 'package:dio_more/src/core/context.dart';
+import 'package:dio_more/src/core/event_bus.dart';
+import 'package:dio_more/src/core/logger.dart';
+import 'package:dio_more/src/interceptors/studio_interceptor.dart';
+import 'package:dio_more/src/plugins/plugin.dart';
+import 'package:dio_more/src/plugins/plugin_manager.dart';
 import 'package:test/test.dart';
 
 class StubRequestPlugin extends DioStudioPlugin implements RequestPlugin {
@@ -17,7 +17,7 @@ class StubRequestPlugin extends DioStudioPlugin implements RequestPlugin {
   PluginMetadata get metadata => const PluginMetadata(
     id: 'test.stub',
     name: 'Stub',
-    version: '1.0.0',
+    version: '0.9.0',
     author: 'test',
     description: 'test',
     minStudioVersion: '0.0.1',

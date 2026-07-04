@@ -1,5 +1,5 @@
-import 'package:dio_studio/src/core/event_bus.dart';
-import 'package:dio_studio/src/core/events/request_events.dart';
+import 'package:dio_more/src/core/event_bus.dart';
+import 'package:dio_more/src/core/events/request_events.dart';
 import 'package:test/test.dart';
 import 'package:dio/dio.dart';
 

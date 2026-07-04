@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:dio_studio/dio_studio.dart';
+import 'package:dio_more/dio_more.dart';
 import 'package:test/test.dart';
-import 'package:dio_studio/src/features/logging/log_filter.dart';
-import 'package:dio_studio/src/features/logging/log_formatter.dart';
-import 'package:dio_studio/src/features/logging/log_writer.dart';
+import 'package:dio_more/src/features/logging/log_filter.dart';
+import 'package:dio_more/src/features/logging/log_formatter.dart';
+import 'package:dio_more/src/features/logging/log_writer.dart';
 
 void main() {
   group('Logging Presets', () {
@@ -91,14 +91,14 @@ void main() {
 
       // Setup RequestOptions with matching registry/endpoint
       final authOptions = RequestOptions(path: 'auth.login')
-        ..extra['dio_studio.endpoint_definition'] =
+        ..extra['dio_more.endpoint_definition'] =
             registry.endpoints[endpointAuth]
-        ..extra['dio_studio.registry'] = registry;
+        ..extra['dio_more.registry'] = registry;
 
       final userOptions = RequestOptions(path: 'user.profile')
-        ..extra['dio_studio.endpoint_definition'] =
+        ..extra['dio_more.endpoint_definition'] =
             registry.endpoints[endpointUser]
-        ..extra['dio_studio.registry'] = registry;
+        ..extra['dio_more.registry'] = registry;
 
       final rawOptions = RequestOptions(path: '/some-other-raw-path');
 

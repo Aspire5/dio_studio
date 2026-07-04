@@ -1,6 +1,6 @@
-import 'package:dio_studio/dio_studio.dart';
-import 'package:dio_studio/src/plugins/plugin.dart';
-import 'package:dio_studio/src/plugins/plugin_manager.dart';
+import 'package:dio_more/dio_more.dart';
+import 'package:dio_more/src/plugins/plugin.dart';
+import 'package:dio_more/src/plugins/plugin_manager.dart';
 import 'package:test/test.dart';
 
 class MockBasePlugin extends DioStudioPlugin {
@@ -20,7 +20,7 @@ class MockBasePlugin extends DioStudioPlugin {
   PluginMetadata get metadata => PluginMetadata(
     id: id,
     name: 'Mock $id',
-    version: '1.0.0',
+    version: '0.9.0',
     author: 'test',
     description: 'test',
     minStudioVersion: '0.0.1',

@@ -1,19 +1,19 @@
 # Contributing Guidelines
 
-Thank you for considering contributing to `dio_studio`!
+Thank you for considering contributing to `dio_more`!
 
 ## Code of Conduct
 By participating in this project, you agree to abide by our Code of Conduct.
 
 ## Our Development Standard
 This project adheres to rigorous coding, documentation, and performance standards. Before writing any code, please review:
-1. `docs/design_principles.md`
-2. `docs/coding_guidelines.md`
-3. `docs/architecture.md`
+1. `doc/design_principles.md`
+2. `doc/coding_guidelines.md`
+3. `doc/architecture.md`
 4. `.agents/AGENTS.md` (AI collaboration guidelines)
 
 ## Sync Requirement
-Every pull request that changes package execution code MUST update the corresponding documentation files (e.g. `docs/public_api.md`, `docs/folder_structure.md`). PRs that violate this requirement will not be merged.
+Every pull request that changes package execution code MUST update the corresponding documentation files (e.g. `doc/public_api.md`, `doc/folder_structure.md`). PRs that violate this requirement will not be merged.
 
 ## Pull Request Lifecycle
 1. Fork the repository.
@@ -26,5 +26,5 @@ Every pull request that changes package execution code MUST update the correspon
    dart analyze --fatal-warnings
    dart test
    ```
-6. Add an entry to `docs/development_log.md` and `CHANGELOG.md`.
+6. Add an entry to `doc/development_log.md` and `CHANGELOG.md`.
 7. Submit the pull request.

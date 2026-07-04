@@ -6,15 +6,15 @@ Before making architectural changes, read this file first.
 
 ---
 
-## ADR-001: dio_studio extends Dio, never replaces it
+## ADR-001: dio_more extends Dio, never replaces it
 
 **Date:** 2026-06-30
 
 **Decision:**
-dio_studio is a developer toolkit built on top of Dio. It attaches to existing Dio instances and provides additional capabilities. It never wraps, hides, or replaces Dio.
+dio_more is a developer toolkit built on top of Dio. It attaches to existing Dio instances and provides additional capabilities. It never wraps, hides, or replaces Dio.
 
 **Reasoning:**
-Dio is a mature, well-tested HTTP client. Replacing it would mean re-implementing HTTP logic, losing community trust, and creating migration pain. Extending it lets developers keep their existing Dio setup and adopt dio_studio features incrementally.
+Dio is a mature, well-tested HTTP client. Replacing it would mean re-implementing HTTP logic, losing community trust, and creating migration pain. Extending it lets developers keep their existing Dio setup and adopt dio_more features incrementally.
 
 **Alternatives considered:**
 1. Build a standalone HTTP client with all features built in.
@@ -24,13 +24,13 @@ Dio is a mature, well-tested HTTP client. Replacing it would mean re-implementin
 
 **Pros:**
 - Developers keep their existing Dio knowledge and setup.
-- dio_studio can be added or removed without changing the HTTP layer.
+- dio_more can be added or removed without changing the HTTP layer.
 - Smaller scope, faster development.
 - Leverages Dio's interceptor system for clean integration.
 
 **Cons:**
 - Constrained by Dio's API surface and interceptor model.
-- Breaking changes in Dio could affect dio_studio.
+- Breaking changes in Dio could affect dio_more.
 
 **Impact:**
 All features must integrate through Dio's public API (interceptors, adapters, transformers). No internal Dio hacking.
@@ -42,7 +42,7 @@ All features must integrate through Dio's public API (interceptors, adapters, tr
 **Date:** 2026-06-30
 
 **Decision:**
-Every dio_studio feature is opt-in. Attaching dio_studio to a Dio instance does nothing by default. Developers explicitly enable the features they want.
+Every dio_more feature is opt-in. Attaching dio_more to a Dio instance does nothing by default. Developers explicitly enable the features they want.
 
 **Reasoning:**
 Developers have different needs. A developer who only wants mocking should not pay the cost (runtime or cognitive) of recording, replay, or inspection features.
@@ -69,10 +69,10 @@ Each feature must be independently activatable. No feature should depend on anot
 **Date:** 2026-06-30
 
 **Decision:**
-dio_studio uses a plugin architecture for extensibility. Third-party developers can create plugins that hook into dio_studio's lifecycle.
+dio_more uses a plugin architecture for extensibility. Third-party developers can create plugins that hook into dio_more's lifecycle.
 
 **Reasoning:**
-We cannot anticipate every use case. A plugin system lets the community extend dio_studio without forking or modifying core code.
+We cannot anticipate every use case. A plugin system lets the community extend dio_more without forking or modifying core code.
 
 **Alternatives considered:**
 1. Monolithic design with all features hardcoded.
@@ -99,7 +99,7 @@ A stable plugin interface must be defined early. Changes to the plugin API are b
 **Date:** 2026-06-30
 
 **Decision:**
-All state is scoped to a dio_studio instance. There is no global singleton, no static configuration, no ambient state.
+All state is scoped to a dio_more instance. There is no global singleton, no static configuration, no ambient state.
 
 **Reasoning:**
 Global state makes testing difficult, creates hidden dependencies between components, and breaks when multiple Dio instances are in use.
@@ -126,13 +126,13 @@ All internal code must accept dependencies through constructors or method parame
 **Date:** 2026-06-30
 
 **Decision:**
-Re-export the underlying `package:dio/dio.dart` dependency directly from the single unified entry point `package:dio_studio/dio_studio.dart`.
+Re-export the underlying `package:dio/dio.dart` dependency directly from the single unified entry point `package:dio_more/dio_more.dart`.
 
 **Reasoning:**
-This aligns with the goal of minimizing migration efforts. Instead of managing separate imports for standard Dio requests and dio_studio configurations, developers swap their import to `dio_studio` and all core symbols (`Dio`, `Response`, `DioException`, etc.) remain accessible.
+This aligns with the goal of minimizing migration efforts. Instead of managing separate imports for standard Dio requests and dio_more configurations, developers swap their import to `dio_more` and all core symbols (`Dio`, `Response`, `DioException`, etc.) remain accessible.
 
 **Alternatives considered:**
-1. Require double imports: `import 'package:dio/dio.dart';` and `import 'package:dio_studio/dio_studio.dart';`.
+1. Require double imports: `import 'package:dio/dio.dart';` and `import 'package:dio_more/dio_more.dart';`.
    - Rejected: Decreases developer integration experience.
 
 **Pros:**
@@ -140,7 +140,7 @@ This aligns with the goal of minimizing migration efforts. Instead of managing s
 - Single import manages the entire network toolkit client context.
 
 **Cons:**
-- Tight coupling to major Dio versions; a breaking change in Dio requires coordinating updates to dio_studio exports.
+- Tight coupling to major Dio versions; a breaking change in Dio requires coordinating updates to dio_more exports.
 
 ---
 
@@ -249,7 +249,7 @@ Separating endpoint configuration from parameter injection ensures that endpoint
 Introduce zero-configuration console request/response logging enabled automatically in debug mode via a cascade initializer method (`Dio()..enableStudio()`). Predefine logging behaviors using immutable `Logging` presets (such as `Logging.all`, `Logging.errorsOnly`, and `Logging.none`). Register all plugins internally, removing direct plugin configuration array exposure from the public API.
 
 **Reasoning:**
-- **Zero-Ripple Migration:** Chaining `enableStudio` directly on the standard `Dio` instance lets developers integrate `dio_studio` without modifying type annotations or constructor signatures across their codebases.
+- **Zero-Ripple Migration:** Chaining `enableStudio` directly on the standard `Dio` instance lets developers integrate `dio_more` without modifying type annotations or constructor signatures across their codebases.
 - **Improved DX/AI Autocomplete:** Using strongly typed constant presets instead of generic string/map configurations or `dynamic` values provides outstanding autocomplete features inside IDEs and maximizes success rates for automated code generators.
 - **Git Noise Reduction:** Consuming an optional local focus file (`lib/dio_logging.dart` via `logOnly`) prevents developers from polluting `main.dart` or bootstrap configurations with temporary debugging states.
 - **Performance Safeguard:** Splitting long messages and printing them line-by-line using native `print()` bypasses OS buffer truncation (such as logcat's 4KB block limits) and retains cross-platform support without requiring external package dependencies.

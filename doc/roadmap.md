@@ -24,7 +24,7 @@ These features are committed to and will be implemented in upcoming phases.
 | API Recording & Replay | Traffic persistence and replay playback | `0.2.0` | High |
 | Network Simulation | Client-side latency, error rate, and throttle simulations | `0.5.0` | Medium |
 | DevTools Inspector | Telemetry visualization and search dashboard widget | `0.9.0` | Medium |
-| Production Release | Stable APIs, full test coverages, and pub.dev publication | `1.0.0` | High |
+| Production Release | Stable APIs, full test coverages, and pub.dev publication | `0.9.0` | High |
 
 ## Deferred
 

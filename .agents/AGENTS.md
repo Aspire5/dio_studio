@@ -1,10 +1,10 @@
-# dio_studio - AI Collaboration Rules
+# dio_more - AI Collaboration Rules
 
-These rules apply to all AI-assisted development on the dio_studio project.
+These rules apply to all AI-assisted development on the dio_more project.
 
 ## Project Identity
 
-- Package name: `dio_studio`
+- Package name: `dio_more`
 - Type: Flutter/Dart package
 - Purpose: Developer toolkit built on top of Dio for API integration, mocking, recording, replay, network simulation, testing, and request inspection.
 - This package does NOT replace Dio. It extends Dio.
@@ -69,7 +69,7 @@ Keep everything professional, direct, and natural.
 
 ## File Organization
 
-- The `lib/dio_studio.dart` barrel file exports only the public API.
+- The `lib/dio_more.dart` barrel file exports only the public API.
 - All implementation lives under `lib/src/`.
 - Do not put implementation code directly in `lib/`.
 - Group related files into feature directories under `lib/src/`.

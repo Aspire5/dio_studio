@@ -1,19 +1,19 @@
 # Design Principles
 
-This document outlines the core architectural and implementation tenets of `dio_studio`. Every design decision and pull request must align with these principles.
+This document outlines the core architectural and implementation tenets of `dio_more`. Every design decision and pull request must align with these principles.
 
 ---
 
 ## 1. Dio First, Never Replace Dio
-`dio_studio` is designed to extend and support the existing [Dio](https://pub.dev/packages/dio) HTTP client. It must never attempt to wrap, hide, or replace standard Dio classes (like `Dio`, `Response`, `RequestOptions`, `DioException`). Users continue to use standard Dio as their primary interface.
+`dio_more` is designed to extend and support the existing [Dio](https://pub.dev/packages/dio) HTTP client. It must never attempt to wrap, hide, or replace standard Dio classes (like `Dio`, `Response`, `RequestOptions`, `DioException`). Users continue to use standard Dio as their primary interface.
 
 ## 2. Minimal Migration Effort
-Adopting `dio_studio` should require as close to zero changes in existing user codebases as possible.
-- **Unified Entry Point:** Re-export `package:dio/dio.dart` directly from `package:dio_studio/dio_studio.dart`.
+Adopting `dio_more` should require as close to zero changes in existing user codebases as possible.
+- **Unified Entry Point:** Re-export `package:dio/dio.dart` directly from `package:dio_more/dio_more.dart`.
 - **Extension Methods:** Hook into `Dio` lifecycle using extensions like `dio.enableStudio()`.
 
 ## 3. Opt-In Functionality
-No feature in `dio_studio` is active by default. Simply initializing or adding the library to a `Dio` instance must not alter network behaviors or degrade execution performance.
+No feature in `dio_more` is active by default. Simply initializing or adding the library to a `Dio` instance must not alter network behaviors or degrade execution performance.
 
 ## 4. Performance First (Negligible Overhead)
 Performance is a core differentiator:

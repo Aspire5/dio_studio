@@ -1,12 +1,12 @@
-/// dio_studio - A developer toolkit built on top of Dio.
+/// dio_more - A developer toolkit built on top of Dio.
 ///
-/// This package extends Dio with tools for API mocking, recording, replay,
-/// network simulation, testing, and request inspection.
+/// This package extends Dio with tools for API endpoint registry management
+/// and console logging.
 ///
-/// dio_studio does not replace Dio. It attaches to an existing Dio instance
+/// dio_more does not replace Dio. It attaches to an existing Dio instance
 /// and adds developer experience features on top.
 ///
-/// See the docs/ directory for detailed documentation.
+/// See the doc/ directory for detailed documentation.
 library;
 
 // Re-export standard Dio HTTP package classes so users have a drop-in experience.

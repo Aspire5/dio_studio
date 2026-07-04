@@ -1,6 +1,6 @@
 # Coding Guidelines
 
-Standards and conventions for all code in dio_studio.
+Standards and conventions for all code in dio_more.
 
 ## Dart Style
 
@@ -9,7 +9,7 @@ Follow the official [Effective Dart](https://dart.dev/effective-dart) guidelines
 ## Naming
 
 - Classes: `PascalCase` (e.g., `DioStudio`, `MockPlugin`)
-- Files: `snake_case` (e.g., `dio_studio.dart`, `mock_plugin.dart`)
+- Files: `snake_case` (e.g., `dio_more.dart`, `mock_plugin.dart`)
 - Variables and functions: `camelCase` (e.g., `requestCount`, `attachTo`)
 - Constants: `camelCase` (e.g., `defaultTimeout`, not `DEFAULT_TIMEOUT`)
 - Private members: prefix with `_` (e.g., `_interceptors`)
@@ -50,10 +50,10 @@ import 'plugin_interface.dart';
 - Document parameters, return values, and thrown exceptions for public methods.
 
 ```dart
-/// Attaches dio_studio to the given [dio] instance.
+/// Attaches dio_more to the given [dio] instance.
 ///
 /// This registers all configured plugins and interceptors.
-/// Call [detach] to remove dio_studio from the Dio instance.
+/// Call [detach] to remove dio_more from the Dio instance.
 ///
 /// Throws [StateError] if already attached to a Dio instance.
 void attach(Dio dio) { ... }

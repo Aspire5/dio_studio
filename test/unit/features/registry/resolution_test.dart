@@ -1,5 +1,5 @@
-import 'package:dio_studio/dio_studio.dart';
-import 'package:dio_studio/src/features/registry/endpoint.dart';
+import 'package:dio_more/dio_more.dart';
+import 'package:dio_more/src/features/registry/endpoint.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -52,13 +52,13 @@ void main() {
 
               // Check Plugin Integration Contract
               final epDef =
-                  options.extra['dio_studio.endpoint_definition']
+                  options.extra['dio_more.endpoint_definition']
                       as EndpointDefinition?;
               expect(epDef, isNotNull);
               expect(epDef!.id, endpointProfile);
 
               final pathParams =
-                  options.extra['dio_studio.path_parameters']
+                  options.extra['dio_more.path_parameters']
                       as Map<String, Object?>?;
               expect(pathParams, isNotNull);
               expect(pathParams!['id'], 123);
@@ -152,7 +152,7 @@ void main() {
               requestFired = true;
               expect(options.path, '/custom-raw-endpoint');
               expect(options.baseUrl, '');
-              expect(options.extra['dio_studio.endpoint_definition'], isNull);
+              expect(options.extra['dio_more.endpoint_definition'], isNull);
               handler.resolve(
                 Response(requestOptions: options, statusCode: 200),
               );

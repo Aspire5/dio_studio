@@ -174,13 +174,13 @@ class ApiRegistryBuilder {
 /// Centralized internal extra keys used within RequestOptions.extra.
 abstract class StudioExtra {
   /// Key for the resolved [EndpointDefinition].
-  static const endpointDefinition = 'dio_studio.endpoint_definition';
+  static const endpointDefinition = 'dio_more.endpoint_definition';
 
   /// Key for path parameters map.
-  static const pathParameters = 'dio_studio.path_parameters';
+  static const pathParameters = 'dio_more.path_parameters';
 
   /// Key for the [ApiRegistry] context instance.
-  static const registry = 'dio_studio.registry';
+  static const registry = 'dio_more.registry';
 }
 
 /// Helper extension on [Options] to easily define path parameters in standard Dio requests.

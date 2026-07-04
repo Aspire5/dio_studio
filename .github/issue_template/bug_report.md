@@ -22,7 +22,7 @@ A clear and concise description of what you expected to happen.
 **Environment (please complete the following information):**
 - Dart SDK Version:
 - Dio Version:
-- dio_studio Version:
+- dio_more Version:
 - OS:
 
 **Additional context**

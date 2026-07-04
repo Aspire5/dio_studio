@@ -1,19 +1,19 @@
-# dio_studio
+# dio_more
 
-[![pub package](https://img.shields.io/pub/v/dio_studio.svg)](https://pub.dev/packages/dio_studio)
-[![Build Status](https://github.com/Aspire5/dio_studio/workflows/Dart%20CI/badge.svg)](https://github.com/Aspire5/dio_studio/actions)
-[![Platform Support](https://img.shields.io/badge/platform-flutter%20%7C%20dart-blue.svg)](https://pub.dev/packages/dio_studio)
+[![pub package](https://img.shields.io/pub/v/dio_more.svg)](https://pub.dev/packages/dio_more)
+[![Build Status](https://github.com/Aspire5/dio_more/workflows/Dart%20CI/badge.svg)](https://github.com/Aspire5/dio_more/actions)
+[![Platform Support](https://img.shields.io/badge/platform-flutter%20%7C%20dart-blue.svg)](https://pub.dev/packages/dio_more)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A developer toolkit built on top of [Dio](https://pub.dev/packages/dio) for structured console logging and type-safe API endpoint management.
 
-`dio_studio` is **not** a replacement HTTP client. It attaches to your existing `Dio` instance as a clean sidecar, boosting your debugging and URL routing workflow with zero code-generation.
+`dio_more` is **not** a replacement HTTP client. It attaches to your existing `Dio` instance as a clean sidecar, boosting your debugging and URL routing workflow with zero code-generation.
 
 ---
 
-## Why dio_studio?
+## Why dio_more?
 
-| Feature | Plain Dio | `pretty_dio_logger` | `dio_studio` |
+| Feature | Plain Dio | `pretty_dio_logger` | `dio_more` |
 | :--- | :--- | :--- | :--- |
 | **Console Formatting** | No standard format | Unicode boxes | Unicode boxes + line-by-line printing |
 | **Line Truncation Protection**| No | No (logs get truncated on Android/OS limits) | **Yes** (split-printed, preserves alignment) |
@@ -26,18 +26,18 @@ A developer toolkit built on top of [Dio](https://pub.dev/packages/dio) for stru
 
 ## Installation
 
-Add `dio_studio` to your `pubspec.yaml`:
+Add `dio_more` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
   dio: ^5.0.0
-  dio_studio: ^1.0.0
+  dio_more: ^0.9.0
 ```
 
 Or run:
 
 ```bash
-dart pub add dio_studio
+dart pub add dio_more
 ```
 
 ---
@@ -47,13 +47,13 @@ dart pub add dio_studio
 Enable visual console logging with default presets using cascade setup:
 
 ```dart
-import 'package:dio_studio/dio_studio.dart';
+import 'package:dio_more/dio_more.dart';
 
 void main() async {
   final dio = Dio()..enableStudio();
 
   // Your request logs will print as aligned, readable visual boxes in the console
-  await dio.get('https://pub.dev/api/packages/dio_studio');
+  await dio.get('https://pub.dev/api/packages/dio_more');
 }
 ```
 
@@ -61,7 +61,7 @@ void main() async {
 
 ## Migration from Dio
 
-Since `dio_studio` extends `Dio` via extensions, **no changes** are required to your existing network requests code. Simply add `..enableStudio()` to your client initialization:
+Since `dio_more` extends `Dio` via extensions, **no changes** are required to your existing network requests code. Simply add `..enableStudio()` to your client initialization:
 
 ```diff
 - final dio = Dio();
@@ -97,7 +97,7 @@ final dio = Dio()..enableStudio(registry: registry);
 // 4. Fire requests using the logical Endpoint ID in place of the path
 await dio.get(
   'pub.get_package',
-  options: Options()..withParams({'name': 'dio_studio'}),
+  options: Options()..withPathParams({'name': 'dio_more'}),
 );
 ```
 
@@ -134,7 +134,7 @@ final dio = Dio()
 
 ### Request Log
 ```text
-┌── [Req#001] GET https://pub.dev/api/packages/dio_studio
+┌── [Req#001] GET https://pub.dev/api/packages/dio_more
 │   Endpoint: pub.get_package (Environment: production)
 │   Headers:
 │     Authorization: ******
@@ -150,8 +150,8 @@ final dio = Dio()
 │     content-type: application/json; charset=utf-8
 │   Body:
 │     {
-│       "name": "dio_studio",
-│       "version": "1.0.0"
+│       "name": "dio_more",
+│       "version": "0.9.0"
 │     }
 │   Performance:
 │     Duration: 180 ms
@@ -174,7 +174,7 @@ Check out the executable standalone examples inside the `example/bin/` directory
 ## FAQ
 
 #### Does this impact production performance?
-No. `dio_studio` uses compile-time checks (`dart.vm.product` / `dart.vm.profile`) to completely tree-shake and strip out logging code, formats, and writers from release builds, guaranteeing **zero runtime overhead** in production.
+No. `dio_more` uses compile-time checks (`dart.vm.product` / `dart.vm.profile`) to completely tree-shake and strip out logging code, formats, and writers from release builds, guaranteeing **zero runtime overhead** in production.
 
 #### Does this replace Dio?
 No. It attaches onto any standard `Dio` instance without overriding the default core behaviors of your client.
@@ -183,16 +183,15 @@ No. It attaches onto any standard `Dio` instance without overriding the default 
 
 ## API Stability
 
-`dio_studio` adheres strictly to **Semantic Versioning (SemVer)** principles:
-- **Major versions (`1.x.y`)** represent stable APIs. Breaking changes will only be introduced at major increments.
-- **Minor versions (`1.x.y`)** introduce backwards-compatible features (such as opt-in simulators).
-- **Patch versions (`1.0.x`)** introduce bug fixes, layout formatting corrections, and documentation syncs.
+`dio_more` is currently in **Public Preview (0.9.0)**:
+- We aim to keep the core API stable, but community feedback during this preview phase may result in minor breaking changes before the 1.0.0 stable release.
+- Releases will follow Semantic Versioning (SemVer) principles to track changes clearly.
 
 ---
 
 ## Contributing
 
-We welcome contributions! Please review our [CONTRIBUTING.md](CONTRIBUTING.md) and [architecture guidelines](docs/architecture.md) before submitting pull requests.
+We welcome contributions! Please review our [CONTRIBUTING.md](CONTRIBUTING.md) and [architecture guidelines](doc/architecture.md) before submitting pull requests.
 
 ---
 

@@ -1,6 +1,6 @@
 # Development Log
 
-Chronological record of all development activity on dio_studio.
+Chronological record of all development activity on dio_more.
 
 ---
 

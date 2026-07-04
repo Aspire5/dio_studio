@@ -1,6 +1,6 @@
 # Public API
 
-This document tracks all public-facing APIs exported from `lib/dio_studio.dart`.
+This document tracks all public-facing APIs exported from `lib/dio_more.dart`.
 
 Every addition, modification, or removal of a public API must be reflected here.
 

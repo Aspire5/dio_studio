@@ -3,7 +3,7 @@
 This document describes the project layout. Update this whenever directories or files are added, moved, or removed.
 
 ```
-dio_studio/
+dio_more/
 |
 |-- .agents/
 |   |-- AGENTS.md              # AI collaboration rules for this project
@@ -19,7 +19,7 @@ dio_studio/
 |   |-- development_log.md     # Chronological log of development activity
 |   |-- future_ideas.md        # Ideas for future exploration (not committed to)
 |   |-- migration_notes.md     # Notes for users migrating between versions
-|   |-- design_principles.md   # Core design principles of dio_studio
+|   |-- design_principles.md   # Core design principles of dio_more
 |   |-- vision.md              # Mission, success criteria, and non-goals
 |   |-- api_stability.md       # API stability categorization references
 |
@@ -27,7 +27,7 @@ dio_studio/
 |   |-- results/               # Cached benchmark reports for comparison
 |
 |-- lib/
-|   |-- dio_studio.dart        # Unified entry point (exports public symbols & re-exports Dio)
+|   |-- dio_more.dart        # Unified entry point (exports public symbols & re-exports Dio)
 |   |-- src/                   # All implementation code lives here
 |       |-- core/              # Shared core (context, Event Bus, logging, events)
 |           |-- events/        # Modular event categories
@@ -59,7 +59,7 @@ dio_studio/
 
 ## Conventions
 
-- `lib/dio_studio.dart` is the single barrel file. It exports only public API symbols and re-exports `package:dio/dio.dart`.
+- `lib/dio_more.dart` is the single barrel file. It exports only public API symbols and re-exports `package:dio/dio.dart`.
 - All implementation goes inside `lib/src/`. Never place implementation files directly in `lib/`.
 - Feature directories inside `lib/src/features/` group related files.
 - Test file paths mirror source file paths under their respective subdirectories: `lib/src/core/context.dart` -> `test/unit/core/context_test.dart`.

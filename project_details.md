@@ -11,16 +11,16 @@ A Dart package is a reusable module of code. When you build a package, there are
 ### File Structure and Visibility Boundaries
 A standard package has a `lib/` directory:
 ```
-dio_studio/
+dio_more/
 |-- lib/
-|   |-- dio_studio.dart        # The entry/barrel file (Public API)
+|   |-- dio_more.dart        # The entry/barrel file (Public API)
 |   |-- src/                   # Implementation files (Hidden/Private)
 ```
 
-1. **The Entry / Barrel File (`lib/dio_studio.dart`):**
+1. **The Entry / Barrel File (`lib/dio_more.dart`):**
    * This is the only file that developers import when using the package:
      ```dart
-     import 'package:dio_studio/dio_studio.dart';
+     import 'package:dio_more/dio_more.dart';
      ```
    * It uses `export` statements to expose public classes, methods, and extensions. If a file or class is not exported here, developers importing your package cannot access or see it.
 
@@ -30,9 +30,9 @@ dio_studio/
 
 ---
 
-## 2. How `dio_studio` Navigates Under the Hood
+## 2. How `dio_more` Navigates Under the Hood
 
-When a developer attaches `dio_studio` to their `Dio` client, here is the lifecycle and execution path:
+When a developer attaches `dio_more` to their `Dio` client, here is the lifecycle and execution path:
 
 ```
                   ┌───────────────────────────────┐

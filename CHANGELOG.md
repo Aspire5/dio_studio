@@ -1,15 +1,15 @@
 # Changelog
 
-All notable changes to dio_studio are documented in this file.
+All notable changes to dio_more are documented in this file.
 
-The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+The format follows [Keep a Changelog](https://keepachangelog.com/en/0.9.0/).
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2026-07-04
+## [0.9.0] - 2026-07-04
 
 ### Added
-- **First Stable Release** focusing on API Endpoint Management and Beautiful Console Logging.
-- Zero-configuration console request/response logging using static predefined `Logging` presets (`Logging.all`, `Logging.errorsOnly`, `Logging.none`).
+- **Initial Public Preview** focusing on API Endpoint Registry Management and Beautiful Console Logging.
+- Zero-configuration console request/response logging using static predefined `Logging` presets (`Logging.all`, [Logging.errorsOnly], [Logging.none]).
 - Idempotent `Dio.enableStudio()` chained setup API for simple cascade configuration.
 - Internalized plugin registration logic, removing manual configurations from public bootstrap API parameters.
 - High-performance logging plugins utilizing native line-by-line `print` statements to bypass OS log truncations.
@@ -17,7 +17,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Safe payload size guard omitting bodies over 100 KB, and metadata logs for binary or stream responses.
 - Immutable `ApiRegistry` and `ApiRegistryBuilder` supporting environment management, multiple services, and pre-compiled endpoint path template segments.
 - Compile-time safe identifier extension types: `EnvironmentId`, `ServiceId`, and `EndpointId`.
-- Options extension helper method `Options.withParams()` for cleanly passing path parameter arguments.
+- Options extension helper method `Options.withPathParams()` for cleanly passing path parameter arguments.
+
+> [!NOTE]
+> This is the initial public preview release of `dio_more`. Community feedback may result in minor breaking API changes before the official stable 1.0.0 release.
 
 ## [0.0.2] - 2026-07-01
 

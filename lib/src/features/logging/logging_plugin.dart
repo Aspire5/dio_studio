@@ -5,7 +5,7 @@ import 'log_filter.dart';
 import 'log_formatter.dart';
 import 'log_writer.dart';
 
-/// Built-in console logging plugin for dio_studio.
+/// Built-in console logging plugin for dio_more.
 ///
 /// Hooks into request, response, and error execution phases, tracking correlation IDs
 /// and printing visual debug blocks in the IDE terminal.
@@ -18,23 +18,23 @@ class RequestLoggingPlugin extends DioStudioPlugin
   int _transactionCounter = 0;
 
   // Correlation extra keys
-  static const _requestIdKey = 'dio_studio.logging.request_id';
-  static const _startTimeKey = 'dio_studio.logging.start_time';
+  static const _requestIdKey = 'dio_more.logging.request_id';
+  static const _startTimeKey = 'dio_more.logging.start_time';
 
   @override
   PluginMetadata get metadata => const PluginMetadata(
-    id: 'dio_studio.logging',
+    id: 'dio_more.logging',
     name: 'Request Logging Plugin',
-    version: '1.0.0',
+    version: '0.9.0',
     author: 'Antigravity Team',
     description:
         'Formatted Unicode debug logging for network requests, responses, and errors.',
-    minStudioVersion: '1.0.0',
+    minStudioVersion: '0.9.0',
     supportedDioVersion: '5.x.x',
   );
 
   @override
-  Set<String> get runAfter => const {'dio_studio.registry'};
+  Set<String> get runAfter => const {'dio_more.registry'};
 
   @override
   void onInit(StudioContext context) {

@@ -1,6 +1,6 @@
 # Migration Notes
 
-This document provides migration guidance for developers upgrading between versions of dio_studio.
+This document provides migration guidance for developers upgrading between versions of dio_more.
 
 ---
 
